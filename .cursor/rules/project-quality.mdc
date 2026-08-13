@@ -1,0 +1,19 @@
+---
+description: Pass Husky / quality checks — never skip pre-commit hooks
+alwaysApply: true
+---
+
+# Quality / Husky
+
+Canonical: `.agents/rules/quality.md`
+
+## Hard rules
+
+- Never skip Husky: no `--no-verify` / hook bypass.
+- If pre-commit fails, fix ESLint/Prettier (or the reported error) and retry — do not bypass.
+- Prefer validating before commit with `bun run check` (typecheck + lint + format:check).
+- App work is not done in a mergeable state if Husky would reject the staged files.
+
+## What runs
+
+Husky pre-commit → lint-staged: ESLint `--fix --max-warnings=0` + Prettier on staged app files (`.agents/**` skills excluded).

@@ -1,0 +1,18 @@
+---
+description: SEO — metadata per route, sitemap, noindex for forms/portals
+alwaysApply: true
+---
+
+# SEO
+
+Canonical: `.agents/rules/seo.md` · deep guide: `.agents/skills/seo/SKILL.md`
+
+## Hard rules
+
+- Every route exports `metadata` or `generateMetadata` (unique title + description).
+- Spanish Peru (`es_PE`); copy in Spanish.
+- Defaults from `config/metadata.ts` / `config/site.ts` — do not hardcode the site URL elsewhere.
+- Public pages: indexable. Forms / private portals: `robots.index: false`.
+- New indexable routes → add to `app/sitemap.ts`. Never sitemap `noindex` form URLs.
+- Crawl config: `app/robots.ts`. Default OG: `app/opengraph-image.tsx`.
+- Metadata lives in thin `app/**/page.tsx`, not buried inside feature section components.

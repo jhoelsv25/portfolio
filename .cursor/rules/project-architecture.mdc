@@ -1,0 +1,42 @@
+---
+description: Fidenza folder architecture — config, components, layout, features, providers
+alwaysApply: true
+---
+
+# Project architecture
+
+Canonical docs:
+- `.agents/rules/architecture.md`
+- `.agents/skills/fidenza-architecture/SKILL.md`
+- `.agents/README.md` (how `.agents` + `.cursor` work together)
+
+## Place code correctly
+
+- `config/` — site info, navigation, social
+- `app/` — thin routes only
+- `layout/` — Header, Footer, SiteShell
+- `features/<area>/` — domain modules:
+  - `sections/` — page sections
+  - `components/` — feature forms/widgets (keep sections thin)
+  - `config/` — copy
+  - `consts/` — enums, options, limits
+  - `types/` — TS types
+  - `schema/` — Zod + defaultValues
+  - `utils/` — feature helpers
+- `components/` — shared UI
+- `components/ui/` — shadcn CLI only
+- `providers/` — Lenis, theme, toaster
+- `lib/` — app-wide utils (`cn`)
+
+## Hard rules
+
+- **English feature folders** — `features/<area>/` in English (`success-cases`, not `casos-exito`). Spanish OK only for public routes (`/casos-de-exito`) and user copy.
+- **No god files** — never dump schema + consts + utils + copy + UI in one file. Split by concern.
+- Split inside `features/<area>/`: `consts/` · `utils/` · `schema/` · `types/` · `config/` · `components/` · `sections/` (sections stay thin).
+- Nav/contact/social from `@/config` — never hardcode in header/footer.
+- Pages compose `@/layout` + `@/features/*` — no large sections in `app/page.tsx`.
+- No page sections in root `components/`.
+- Forms in `features/<area>/components/`; sections only compose.
+- Do not hand-grow `components/ui/`.
+- Brand tokens from `app/globals.css`.
+- Icons: Hugeicons via `@/components/icon`; Lucide only in shadcn UI.
