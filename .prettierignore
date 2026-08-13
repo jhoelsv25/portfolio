@@ -1,0 +1,22 @@
+# Dependencies & builds
+node_modules
+.next
+out
+build
+coverage
+dist
+
+# Agent skills (vendor docs)
+.agents
+
+# Lock / generated
+bun.lock
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+next-env.d.ts
+
+# Misc
+public
+*.min.js
+*.min.css
