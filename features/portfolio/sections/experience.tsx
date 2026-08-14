@@ -45,7 +45,7 @@ export function ExperienceSection({
         </MotionReveal>
 
         {/* Clean Open Editorial Timeline */}
-        <div className="relative mx-auto max-w-3xl space-y-12 before:absolute before:inset-0 before:left-3 before:w-0.5 before:bg-gradient-to-b before:from-orange-500 before:via-amber-500 before:to-orange-500/10">
+        <div className="relative mx-auto max-w-3xl space-y-12 before:absolute before:inset-0 before:left-3 before:w-0.5 before:bg-linear-to-b before:from-orange-500 before:via-amber-500 before:to-orange-500/10">
           {displayedExperience.map((exp, index) => (
             <MotionReveal
               key={exp.id}

@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import {
   ArrowLeft,
   ExternalLink,
   CheckCircle2,
   Sparkles,
-  Layers,
   Server,
   Code2,
   ArrowRight,
@@ -15,6 +13,7 @@ import {
 import { Container } from "@/components/container";
 import { projectsData } from "@/config";
 import { TechBadge } from "@/features/portfolio/components/tech-badge";
+import { ProjectGallery } from "@/features/portfolio/components/project-gallery";
 import { GithubIcon } from "@/components/social-icons";
 import { buttonVariants } from "@/components/ui/button";
 
@@ -146,31 +145,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </div>
         </div>
 
-        {/* High Resolution Gallery */}
-        <div className="space-y-6">
-          <h2 className="text-foreground flex items-center gap-2 text-xl font-bold">
-            <Layers className="size-5 text-orange-500" />
-            Galería del Sistema & Vistas
-          </h2>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {gallery.map((img, idx) => (
-              <div
-                key={idx}
-                className="group bg-muted/60 relative aspect-video w-full overflow-hidden rounded-2xl shadow-md transition-all hover:shadow-lg"
-              >
-                <Image
-                  src={img}
-                  alt={`${project.title} vista ${idx + 1}`}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority={idx === 0}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* High Resolution Gallery with Modal Lightbox */}
+        <ProjectGallery images={gallery} projectTitle={project.title} />
 
         {/* Architecture & Engineering Highlights */}
         <div className="border-border/40 grid grid-cols-1 gap-8 border-t pt-4 md:grid-cols-12">
@@ -238,7 +214,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
           <Link
             href={`/proyectos/${nextProject.id}`}
-            className="group text-foreground flex items-center gap-2 text-xs font-bold transition-colors hover:text-orange-500"
+            className="text-foreground group flex items-center gap-2 text-xs font-bold transition-colors hover:text-orange-500"
           >
             <span>Siguiente: {nextProject.title.split(" - ")[0]}</span>
             <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
